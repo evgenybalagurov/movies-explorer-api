@@ -42,3 +42,9 @@ const deleteMovie = async (req, res, next) => {
     return next(err);
   }
 };
+
+module.exports = {
+  getMovies,
+  createMovie,
+  deleteMovie,
+};
