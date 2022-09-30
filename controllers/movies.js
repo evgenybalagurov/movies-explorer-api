@@ -2,7 +2,7 @@ const Movie = require('../models/movie');
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({})
+    const movies = await Movie.find({}); //TODO нужно вывести фильмы текущего user
     return res.send(movies);
   } catch (err) {
     return next(err);
