@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const router = require('./routes');
 
 const { PORT = 3000 } = process.env;
 
@@ -22,6 +24,11 @@ const connect = async (next) => {
 };
 
 connect();
+
+app.use(express.json());
+app.use(cookieParser);
+
+app.use(router);
 
 app.use(requestLogger);
 
