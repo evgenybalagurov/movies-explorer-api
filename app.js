@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -21,3 +22,7 @@ const connect = async (next) => {
 };
 
 connect();
+
+app.use(requestLogger);
+
+app.use(errorLogger);
