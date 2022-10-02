@@ -15,7 +15,7 @@ router.use(auth);
 router.use('/users', usersRouter);
 router.use('/movies', moviesRouter);
 
-router.post('/signout', (req,res) => {
+router.post('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Logged out' });
 });
 
