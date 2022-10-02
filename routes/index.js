@@ -6,6 +6,7 @@ const moviesRouter = require('./movies');
 const auth = require('../middlewares/auth');
 const { login, createUser } = require('../controllers/users');
 const { validateLogin, validateCreateUser } = require('../middlewares/validation');
+const { NotFoundError } = require('../errors/NotFoundError');
 
 router.post('/signin', validateLogin, login);
 router.post('/signup', validateCreateUser, createUser);
@@ -17,6 +18,10 @@ router.use('/movies', moviesRouter);
 
 router.post('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Logged out' });
+});
+
+router.use((req, res, next) => {
+  next(new NotFoundError('Page not found'));
 });
 
 module.exports = router;
