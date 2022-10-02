@@ -16,9 +16,9 @@ const userShema = new mongoose.Schema({
   name: {
     type: String,
     minlength: [2, 'Minimum field length "name" - 2'],
-    maxlength: [2, 'Maximum field length "name" - 30'],
+    maxlength: [30, 'Maximum field length "name" - 30'],
     default: 'Александр',
-  }
+  },
 });
 
 userShema.method.toJSON = function deletePassword() {

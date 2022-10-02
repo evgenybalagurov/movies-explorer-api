@@ -16,7 +16,7 @@ const validateCreateUser = celebrate({
 });
 
 const validateUpdateUser = celebrate({
-  body: Joi.obgect().keys({
+  body: Joi.object().keys({
     email: Joi.string().email(),
     name: Joi.string().min(2).max(30),
   }),
@@ -29,11 +29,11 @@ const validateCreateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().url(),
-    trailerLink: Joi.string().required().url(),
-    thumbnail: Joi.string().required().url(),
+    image: Joi.string().required().uri(),
+    trailerLink: Joi.string().required().uri(),
+    thumbnail: Joi.string().required().uri(),
     owner: Joi.string().alphanum().length(24),
-    movieId: Joi.string().alphanum().length(24), //TODO: id фильма, который содержится в ответе сервиса MoviesExplorer
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),

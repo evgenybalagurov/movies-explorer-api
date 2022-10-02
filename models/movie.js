@@ -25,17 +25,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: [true, 'The field "image" must be filled'],
-    validate: [validator.isUrl, 'Invalid Url address'],
+    validate: [validator.isURL, 'Invalid Url address'],
   },
   trailerLink: {
     type: String,
     required: [true, 'The field "trailerLink" must be filled'],
-    validate: [validator.isUrl, 'Invalid Url address'],
+    validate: [validator.isURL, 'Invalid Url address'],
   },
   thumbnail: {
     type: String,
     required: [true, 'The field "thumbnail" must be filled'],
-    validate: [validator.isUrl, 'Invalid Url address'],
+    validate: [validator.isURL, 'Invalid Url address'],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -43,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: String, //TODO: id фильма, который содержится в ответе сервиса MoviesExplorer
+    type: Number,
     required: true,
   },
   nameRU: {

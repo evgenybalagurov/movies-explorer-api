@@ -28,7 +28,7 @@ const connect = async (next) => {
 connect();
 
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 
 app.use(requestLogger);
 
