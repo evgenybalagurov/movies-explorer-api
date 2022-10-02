@@ -1,4 +1,8 @@
 const Movie = require('../models/movie');
+const { ValidationError } = require('../errors/ValidationError');
+const { NotFoundError } = require('../errors/NotFoundError');
+const { ForbiddenError } = require('../errors/ForbiddenError');
+const { CastError } = require('../errors/CastError');
 
 const getMovies = async (req, res, next) => {
   try {

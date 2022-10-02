@@ -2,6 +2,11 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const { AuthorizationError } = require('../errors/AuthorizationError');
+const { ValidationError } = require('../errors/ValidationError');
+const { ConflictError } = require('../errors/ConflictError');
+const { NotFoundError } = require('../errors/NotFoundError');
+const { CastError } = require('../errors/CastError');
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -12,7 +17,7 @@ const login = async (req, res, next) => {
       return next(new AuthorizationError('Incorrect email or password'));
     }
 
-    const matchedPasswords = await bcript.compare(password, user.password);
+    const matchedPasswords = await bcrypt.compare(password, user.password);
 
     if (!matchedPasswords) {
       return next(new AuthorizationError('Incorrect email or password'));
@@ -20,7 +25,7 @@ const login = async (req, res, next) => {
     const token = jwt.sign(
       { _id: user._id },
       NODE_ENV === 'production' ? JWT_SECRET : 'SECRET',
-      { expiresIn: '7d'},
+      { expiresIn: '7d' },
     );
 
     return res.cookie('jwt', token, {
@@ -56,7 +61,7 @@ const getUser = async (req, res, next) => {
     const user = await User.findById(req.user._id);
 
     if (!user) {
-      return next(new NotFoundError('This user does not exist'))
+      return next(new NotFoundError('This user does not exist'));
     }
     return res.send(user);
   } catch (err) {
@@ -65,7 +70,7 @@ const getUser = async (req, res, next) => {
     }
     return next(err);
   }
-}
+};
 
 const updateUser = async (req, res, next) => {
   const { email, name } = req.body;
@@ -87,7 +92,7 @@ const updateUser = async (req, res, next) => {
     }
     return next(err);
   }
-}
+};
 
 module.exports = {
   login,
