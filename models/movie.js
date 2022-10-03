@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
-  county: {
+  country: {
     type: String,
     required: [true, 'The field "county" must be filled'],
   },
