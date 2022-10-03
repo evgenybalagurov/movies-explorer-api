@@ -6,7 +6,7 @@ const { CastError } = require('../errors/CastError');
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({}); //TODO нужно вывести фильмы текущего user
+    const movies = await Movie.find({ owner: req.user._id });
     return res.send(movies);
   } catch (err) {
     return next(err);
@@ -27,10 +27,10 @@ const createMovie = async (req, res, next) => {
 };
 
 const deleteMovie = async (req, res, next) => {
-  const { movieId } = req.params;
+  const { id } = req.params;
 
   try {
-    const movie = await Movie.findById(movieId);
+    const movie = await Movie.findById(id);
     if (!movie) {
       return next(new NotFoundError('This movie does not exist'));
     }
