@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const limiter = require('./middlewares/rateLimiter');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -32,6 +33,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(requestLogger);
+
+app.use(limiter);
 
 app.use(router);
 
