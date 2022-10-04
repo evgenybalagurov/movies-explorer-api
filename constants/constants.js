@@ -13,6 +13,8 @@ const castMovieErrorMessage = 'Invalid movie id';
 const castUserErrorMessage = 'Invalid user id';
 const authorizationErrorMessage = 'Incorrect email or password';
 const conflictErrorMessage = 'Such an Email exists';
+const invalidEmailMessage = 'Invalid email address';
+const invalidUrlMessage = 'Invalid Url address';
 
 module.exports = {
   ERROR_SERVER_CODE,
@@ -29,4 +31,6 @@ module.exports = {
   castUserErrorMessage,
   authorizationErrorMessage,
   conflictErrorMessage,
+  invalidEmailMessage,
+  invalidUrlMessage,
 };
