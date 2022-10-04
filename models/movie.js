@@ -4,37 +4,37 @@ const validator = require('validator');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: [true, 'The field "county" must be filled'],
+    required: true,
   },
   director: {
     type: String,
-    required: [true, 'The field "director" must be filled'],
+    required: true,
   },
   duration: {
     type: Number,
-    required: [true, 'The field "duration" must be filled'],
+    required: true,
   },
   year: {
     type: String,
-    required: [true, 'The field "year" must be filled'],
+    required: true,
   },
   description: {
     type: String,
-    required: [true, 'The field "description" must be filled'],
+    required: true,
   },
   image: {
     type: String,
-    required: [true, 'The field "image" must be filled'],
+    required: true,
     validate: [validator.isURL, 'Invalid Url address'],
   },
   trailerLink: {
     type: String,
-    required: [true, 'The field "trailerLink" must be filled'],
+    required: true,
     validate: [validator.isURL, 'Invalid Url address'],
   },
   thumbnail: {
     type: String,
-    required: [true, 'The field "thumbnail" must be filled'],
+    required: true,
     validate: [validator.isURL, 'Invalid Url address'],
   },
   owner: {
@@ -48,11 +48,11 @@ const movieSchema = new mongoose.Schema({
   },
   nameRU: {
     type: String,
-    required: [true, 'The field "nameRU" must be filled'],
+    required: true,
   },
   nameEN: {
     type: String,
-    required: [true, 'The field "nameEN" must be filled'],
+    required: true,
   },
 });
 

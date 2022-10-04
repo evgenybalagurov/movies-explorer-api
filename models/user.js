@@ -4,20 +4,20 @@ const validator = require('validator');
 const userShema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, 'The field "email" must be filled'],
-    validate: [validator.isEmail, 'Invalid email address'],
+    required: true,
     unique: true,
+    validate: [validator.isEmail, 'Invalid email address'],
   },
   password: {
     type: String,
-    required: [true, 'The field "password" must be filled'],
+    required: true,
     select: false,
   },
   name: {
     type: String,
-    minlength: [2, 'Minimum field length "name" - 2'],
-    maxlength: [30, 'Maximum field length "name" - 30'],
-    default: 'Александр',
+    required: true,
+    minlength: 2,
+    maxlength: 30,
   },
 });
 
