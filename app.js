@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
@@ -24,6 +25,8 @@ const connect = async (next) => {
 };
 
 connect();
+
+app.use(helmet());
 
 app.use(express.json());
 app.use(cookieParser());
