@@ -19,7 +19,7 @@ const connect = async (next) => {
     });
     await app.listen(PORT);
   } catch (err) {
-    next(new Error('Filed to connect:', err.message));
+    next(err);
   }
 };
 

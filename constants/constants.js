@@ -5,6 +5,7 @@ const ERROR_FORBIDDEN_CODE = 403;
 const ERROR_UNAUTORIZED_CODE = 401;
 const ERROR_DATA_CODE = 400;
 
+const serverErrorMessage = 'An error has occurred on the server';
 const validationErrorMessage = 'Validation error. Incorrect data sent';
 const notFoundMovieErrorMessage = 'This movie does not exist';
 const notFoundUserErrorMessage = 'This user does not exist';
@@ -15,6 +16,9 @@ const authorizationErrorMessage = 'Incorrect email or password';
 const conflictErrorMessage = 'Such an Email exists';
 const invalidEmailMessage = 'Invalid email address';
 const invalidUrlMessage = 'Invalid Url address';
+const authorizationRequiredMessage = 'Authorization required';
+const pageNotFoundMessage = 'Page not found';
+const loggedOutMessage = 'Logged out';
 
 module.exports = {
   ERROR_SERVER_CODE,
@@ -23,6 +27,7 @@ module.exports = {
   ERROR_FORBIDDEN_CODE,
   ERROR_UNAUTORIZED_CODE,
   ERROR_DATA_CODE,
+  serverErrorMessage,
   validationErrorMessage,
   notFoundMovieErrorMessage,
   notFoundUserErrorMessage,
@@ -33,4 +38,7 @@ module.exports = {
   conflictErrorMessage,
   invalidEmailMessage,
   invalidUrlMessage,
+  authorizationRequiredMessage,
+  pageNotFoundMessage,
+  loggedOutMessage,
 };

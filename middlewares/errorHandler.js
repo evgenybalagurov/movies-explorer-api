@@ -1,9 +1,9 @@
-const { ERROR_SERVER_CODE } = require('../constants/constants');
+const { ERROR_SERVER_CODE, serverErrorMessage } = require('../constants/constants');
 
 const errorHandler = (err, req, res, next) => {
   const {
     statusCode = ERROR_SERVER_CODE,
-    message = 'An error has occurred on the server',
+    message = serverErrorMessage,
   } = err;
 
   res.status(statusCode).send({ message });
