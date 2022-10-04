@@ -6,20 +6,18 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, MONGO_URL } = process.env;
+const { MONGO_URL_DEV } = require('./constants/config');
 
 const app = express();
 
 const connect = async (next) => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+    await mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : MONGO_URL_DEV, {
       useNewUrlParser: true,
       useUnifiedTopology: false,
     });
-    console.log('MongoDB connected!');
-
     await app.listen(PORT);
-    console.log(`App listening on port ${PORT}`);
   } catch (err) {
     next(new Error('Filed to connect:', err.message));
   }

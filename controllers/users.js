@@ -1,4 +1,5 @@
 const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET_DEV } = require('../constants/config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -31,7 +32,7 @@ const login = async (req, res, next) => {
     }
     const token = jwt.sign(
       { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'SECRET',
+      NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET_DEV,
       { expiresIn: '7d' },
     );
 
