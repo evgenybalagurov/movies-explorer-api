@@ -3,6 +3,12 @@ const { ValidationError } = require('../errors/ValidationError');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { ForbiddenError } = require('../errors/ForbiddenError');
 const { CastError } = require('../errors/CastError');
+const {
+  validationErrorMessage,
+  notFoundMovieErrorMessage,
+  forbiddenMovieErrorMessage,
+  castMovieErrorMessage,
+} = require('../constants/constants');
 
 const getMovies = async (req, res, next) => {
   try {
@@ -19,7 +25,7 @@ const createMovie = async (req, res, next) => {
     return res.status(201).send(movie);
   } catch (err) {
     if (err.name === 'ValidationError') {
-      return next(new ValidationError('Validation error. Incorrect data sent'));
+      return next(new ValidationError(validationErrorMessage));
     }
     return next(err);
   }
@@ -29,16 +35,16 @@ const deleteMovie = async (req, res, next) => {
   try {
     const movie = await Movie.findById(req.params._id);
     if (!movie) {
-      return next(new NotFoundError('This movie does not exist'));
+      return next(new NotFoundError(notFoundMovieErrorMessage));
     }
     if (req.user._id !== movie.owner.toString()) {
-      return next(new ForbiddenError('This movie is another user'));
+      return next(new ForbiddenError(forbiddenMovieErrorMessage));
     }
     await movie.remove();
     return res.send(movie);
   } catch (err) {
     if (err.name === 'CastError') {
-      return next(new CastError('Invalid movie id'));
+      return next(new CastError(castMovieErrorMessage));
     }
     return next(err);
   }

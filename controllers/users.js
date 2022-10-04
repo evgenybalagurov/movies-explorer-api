@@ -7,6 +7,13 @@ const { ValidationError } = require('../errors/ValidationError');
 const { ConflictError } = require('../errors/ConflictError');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { CastError } = require('../errors/CastError');
+const {
+  authorizationErrorMessage,
+  validationErrorMessage,
+  conflictErrorMessage,
+  notFoundUserErrorMessage,
+  castUserErrorMessage,
+} = require('../constants/constants');
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -14,13 +21,13 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-      return next(new AuthorizationError('Incorrect email or password'));
+      return next(new AuthorizationError(authorizationErrorMessage));
     }
 
     const matchedPasswords = await bcrypt.compare(password, user.password);
 
     if (!matchedPasswords) {
-      return next(new AuthorizationError('Incorrect email or password'));
+      return next(new AuthorizationError(authorizationErrorMessage));
     }
     const token = jwt.sign(
       { _id: user._id },
@@ -47,10 +54,10 @@ const createUser = async (req, res, next) => {
     return res.status(201).send(user);
   } catch (err) {
     if (err.name === 'ValidationError') {
-      return next(new ValidationError('Validation error. Incorrect data sent'));
+      return next(new ValidationError(validationErrorMessage));
     }
     if (err.code === 11000) {
-      return next(new ConflictError('Such an Email exists'));
+      return next(new ConflictError(conflictErrorMessage));
     }
     return next(err);
   }
@@ -61,12 +68,12 @@ const getUser = async (req, res, next) => {
     const user = await User.findById(req.user._id);
 
     if (!user) {
-      return next(new NotFoundError('This user does not exist'));
+      return next(new NotFoundError(notFoundUserErrorMessage));
     }
     return res.send(user);
   } catch (err) {
     if (err.name === 'CastError') {
-      return next(new CastError('Invalid card id'));
+      return next(new CastError(castUserErrorMessage));
     }
     return next(err);
   }
@@ -80,15 +87,15 @@ const updateUser = async (req, res, next) => {
       runValidators: true,
     });
     if (!user) {
-      return next(new NotFoundError('This user does not exist'));
+      return next(new NotFoundError(notFoundUserErrorMessage));
     }
     return res.send(user);
   } catch (err) {
     if (err.name === 'CastError') {
-      return next(new CastError('Invalid card id'));
+      return next(new CastError(castUserErrorMessage));
     }
     if (err.name === 'ValidationError') {
-      return next(new ValidationError('Validation error. Incorrect data sent'));
+      return next(new ValidationError(validationErrorMessage));
     }
     return next(err);
   }
