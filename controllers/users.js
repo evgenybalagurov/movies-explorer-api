@@ -1,8 +1,8 @@
 const { NODE_ENV, JWT_SECRET } = process.env;
-const { JWT_SECRET_DEV } = require('../constants/config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const { JWT_SECRET_DEV } = require('../constants/config');
 const { AuthorizationError } = require('../errors/AuthorizationError');
 const { ValidationError } = require('../errors/ValidationError');
 const { ConflictError } = require('../errors/ConflictError');
