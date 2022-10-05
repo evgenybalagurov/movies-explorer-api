@@ -6,7 +6,8 @@
 
 **адрес и домен сервера:**
 
-api.project-movies-explor.nomoredomains.icu 51.250.73.46
+[api.project-movies-explor.nomoredomains.icu](https://api.project-movies-explor.nomoredomains.icu)
+51.250.73.46
 
 ## Стек
 
