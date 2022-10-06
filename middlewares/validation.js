@@ -1,4 +1,13 @@
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+const { invalidUrlMessage } = require('../constants/constants');
+
+const urlValidator = (value, helpers) => {
+  if (validator.isURL(value)) {
+    return value;
+  }
+  return helpers.message(invalidUrlMessage);
+};
 
 const validateLogin = celebrate({
   body: Joi.object().keys({
@@ -11,7 +20,7 @@ const validateCreateUser = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
   }),
 });
 
@@ -29,9 +38,9 @@ const validateCreateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().uri(),
-    trailerLink: Joi.string().required().uri(),
-    thumbnail: Joi.string().required().uri(),
+    image: Joi.string().required().custom(urlValidator),
+    trailerLink: Joi.string().required().custom(urlValidator),
+    thumbnail: Joi.string().required().custom(urlValidator),
     owner: Joi.string().alphanum().length(24),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),

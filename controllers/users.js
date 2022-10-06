@@ -98,6 +98,9 @@ const updateUser = async (req, res, next) => {
     if (err.name === 'ValidationError') {
       return next(new ValidationError(validationErrorMessage));
     }
+    if (err.code === 11000) {
+      return next(new ConflictError(conflictErrorMessage));
+    }
     return next(err);
   }
 };
